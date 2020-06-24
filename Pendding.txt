@@ -1,0 +1,5 @@
+16/06/2020
+----------
+
+=> add and use fontawesome with npm (pass)
+=> backend navigation collapse show and nav item active for resource routes
