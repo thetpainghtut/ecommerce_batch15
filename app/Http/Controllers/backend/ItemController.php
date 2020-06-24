@@ -58,12 +58,14 @@ class ItemController extends Controller
         ]);
 
         if($request->hasfile('photo'))
-        {
+        {   
+            $i=1;
             foreach($request->file('photo') as $file)
             {
-                $name = time().'.'.$file->extension();
+                $name = time().$i.'.'.$file->extension();
                 $file->move(public_path('images/items'), $name);  
                 $data[] = 'images/items/'.$name;
+                $i++;
             }
         }
 
@@ -118,7 +120,54 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:191',
+            'codeno' => 'required|max:191',
+            'main_category' => 'required',
+            'sub_category' => 'required',
+            'brand' => 'required',
+            'price' => 'required',
+            'discount' => 'required',
+            'description' => 'required',
+            'photo' => 'sometimes',
+            'photo.*' => 'sometimes|mimes:jpeg,bmp,png'
+        ]);
+
+        if($request->hasfile('photo'))
+        {   
+            $i = 1;
+            foreach($request->file('photo') as $file)
+            {
+                $name = time().$i.'.'.$file->extension();
+                $file->move(public_path('images/items'), $name);  
+                $data[] = 'images/items/'.$name;
+                $i++;
+            }
+
+            foreach (json_decode($request->oldphoto) as $oldphoto){
+                if(\File::exists(public_path($oldphoto))){
+                    \File::delete(public_path($oldphoto));
+                }
+            }
+
+        }else{
+            $data = json_decode($request->oldphoto);
+        }
+
+        $item = Item::find($id);
+        $item->name = $request->name;
+        $item->codeno = $request->codeno;
+        $item->subcategory_id = $request->sub_category;
+        $item->brand_id = $request->brand;
+        $item->price = $request->price;
+        $item->discount = $request->discount;
+        $item->description = $request->description;
+        $item->photo = json_encode($data);
+
+
+        $item->save();
+
+        return redirect()->route('items.index')->with('success', 'An item have been successfully updated');
     }
 
     /**

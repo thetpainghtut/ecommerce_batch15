@@ -72,7 +72,9 @@
                     <select class="form-control" name="brand">
                       <optgroup label="Choose Brand">
                         @foreach($brands as $row)
-                          <option value="{{$row->id}}">{{$row->name}}</option>
+                          <option value="{{$row->id}}" 
+                            @if($item->brand_id == $row->id) {{'selected'}} @endif
+                            >{{$row->name}}</option>
                         @endforeach
                       </optgroup>
                     </select>
@@ -82,7 +84,30 @@
                 <div class="form-group row">
                   <label for="inputPhoto" class="col-sm-2 col-form-label">Photo</label>
                   <div class="col-sm-10">
-                    <input type="file" class="form-control-file" id="inputPhoto" name="photo[]" accept="image/*" multiple>
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a href="#old" class="nav-link active" data-toggle="tab">Old</a>
+  </li>
+
+  <li class="nav-item">
+    <a href="#new" class="nav-link" data-toggle="tab">New</a>
+  </li>
+</ul>
+
+<div class="tab-content my-2">
+  <div class="tab-pane fade show active" id="old">
+    @foreach(json_decode($item->photo) as $photo)
+    <img src="{{asset($photo)}}" class="img-fluid w-25">
+    @endforeach
+    <input type="hidden" name="oldphoto" value="{{$item->photo}}">
+  </div>
+
+  <div class="tab-pane" id="new">
+    <input type="file" class="form-control-file" id="inputPhoto" name="photo[]" accept="image/*" multiple>
+  </div>
+</div>
+
                   </div>
                 </div>
 
