@@ -30,7 +30,7 @@
         </div>
         <div class="pt-4 pt-sm-4">
           <button type="button" class="buynowbtn d-inline-block">Buy Now</button>
-          <button type="button" class="addtocartbtn">Add To Cart</button>
+          <button type="button" class="addtocartbtn addToCart" data-id="{{$item->id}}" data-name="{{$item->name}}" data-photo="{{$photos[0]}}" data-price="{{$item->price}}">Add To Cart</button>
         </div>
       </div>
     </div>

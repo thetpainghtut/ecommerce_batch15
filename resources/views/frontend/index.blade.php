@@ -78,7 +78,7 @@
         <div class="card-body">
           <h5 class="card-title">{{$item->name}}</h5>
           <p class="card-text">Price: {{$item->price}}</p>
-          <div class="button_show"><a href="#" class="btn btn-dark ">Add to cart</a></div>
+          <div class="button_show"><a href="#" class="btn btn-dark addToCart" data-id="{{$item->id}}" data-name="{{$item->name}}" data-photo="{{$photos[0]}}" data-price="{{$item->price}}">Add to cart</a></div>
         </div>
       </div>
       @endforeach
@@ -108,7 +108,7 @@
         <div class="card-body">
           <h5 class="card-title">{{$item->name}}</h5>
           <p class="card-text">Price: {{$item->price}}</p>
-          <div class="button_show"><a href="#" class="btn btn-dark ">Add to cart</a></div>
+          <div class="button_show"><a href="#" class="btn btn-dark addToCart" data-id="{{$item->id}}" data-name="{{$item->name}}" data-photo="{{$photos[0]}}" data-price="{{$item->price}}">Add to cart</a></div>
         </div>
       </div>
       @endforeach

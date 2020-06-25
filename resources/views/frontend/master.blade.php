@@ -3,6 +3,7 @@
 <head>
     <title>Ecommerce Design</title>
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" type="text/css" href="{{ asset('frontendals/images/download.png')}}" >
     <link rel="stylesheet" type="text/css" href="{{ asset('frontendals/bootstrap/css/bootstrap.min.css')}}">
@@ -75,5 +76,6 @@
   </div>
 </div>
 
+<script type="text/javascript" src="{{asset('frontendals/js/custom.js')}}"></script>
 </body>
 </html>

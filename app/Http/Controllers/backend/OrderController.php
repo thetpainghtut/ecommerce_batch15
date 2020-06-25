@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Order;
 
 class OrderController extends Controller
 {
@@ -35,7 +36,30 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd(json_decode($request->data));
+        $loStr = json_decode($request->data);
+        $total = 0;
+
+        foreach ($loStr as $row) {
+            $total+=$row->price*$row->qty;
+        }
+
+        $order = new Order;
+        $order->orderdate = date('Y-m-d');
+        $order->voucherno = uniqid();
+        $order->total = $total;
+        $order->note = $request->note;
+        $order->status = 0;
+        $order->user_id = 1;
+        $order->save();
+
+        foreach ($loStr as $value) {
+            $order->items()->attach($value->id,['qty'=>$value->qty]);
+        }
+
+        return response()->json([
+            'status' => 'Order Successfully created!'
+        ]);
     }
 
     /**
