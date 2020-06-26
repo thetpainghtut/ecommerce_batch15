@@ -64,7 +64,7 @@
           <h5 class="card-title mt-3 text-center">Deals and Spical </h5>
         </div>
         <div class="text-center mt-2">
-          <a href="#" class="btn btn-dark mt-5 " >Read More</a>
+          <a href="{{route('shop',0)}}" class="btn btn-dark mt-5">Read More</a>
           
         </div>
       </div>

@@ -26,7 +26,11 @@ class FrontendController extends Controller
 
   public function shop($id)
   {
-    $items = Item::where('subcategory_id',$id)->get();
+    if ($id == 0) {
+      $items = Item::where('discount',0)->get();
+    }else{
+      $items = Item::where('subcategory_id',$id)->get();
+    }
 
     return view('frontend.shop',compact('items'));
   }
