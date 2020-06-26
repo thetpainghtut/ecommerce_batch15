@@ -24,12 +24,11 @@ Route::get('/','frontend\FrontendController@index')->name('main');
 
 Route::get('shop/{id}','frontend\FrontendController@shop')->name('shop');
 
-
 // Route::get('load-more-data','frontend\FrontendController@more_data')->name('loadmore');
 
 Route::get('shopdetail/{id}','frontend\FrontendController@shopdetail')->name('shopdetail');
 
-Route::get('cart','frontend\FrontendController@cart')->name('cart');
+Route::get('cart','frontend\FrontendController@cart')->name('cart')->middleware('auth');
 
 // backend
 
@@ -48,8 +47,6 @@ Route::middleware('role:admin')->group(function () {
   Route::resource('items','backend\ItemController');
 
 });
-
-
 
 Route::resource('orders','backend\OrderController');
 

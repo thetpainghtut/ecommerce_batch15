@@ -23,13 +23,14 @@ $(document).ready(function () {
     itemArr.push(item);
     // console.log(student);
     localStorage.setItem('items',JSON.stringify(itemArr));
-    // getData();
+    getData();
   });
 
   getData();
 
   function getData() {
     let loStr = localStorage.getItem('items');
+    let count=0;
     if (loStr) {
       let itemArr = JSON.parse(loStr);
       let html='';
@@ -40,7 +41,7 @@ $(document).ready(function () {
         let photo = v.photo;
         let price = v.price;
         let qty = v.qty;
-
+        count+=qty;
         html += `<tr>
                 <td>${j++}</td>
                 <td>${name}</td>
@@ -53,6 +54,7 @@ $(document).ready(function () {
       })
       $('#tbody').html(html);
       $('#mytable').show();
+      $('#countNoti').html(count);
     }else{
       $('#mytable').hide();
     }
@@ -71,14 +73,18 @@ $(document).ready(function () {
         }
     });
 
-    $.post('/orders',{data:loStr,note:note},function (res) {
-      // console.log(res);
-      alert(res.status);
-      localStorage.clear();
-    })
+    if (loStr != null) {
+      $.post('/orders',{data:loStr,note:note},function (res) {
+        // console.log(res);
+        alert(res.status);
+        localStorage.clear();
+      })
+    }else{
+      alert('Your Cart is Empty! Go To home Page');
+    }
+
+    window.location.href="/";
   })
-
-
 
 
 

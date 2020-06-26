@@ -36,7 +36,7 @@
     </button>
     <div class="navbar-collapse collapse flex-shrink-1 flex-grow-0 order-last" id="navbar7">
         
-                <a href="{{route('cart')}}"><i class="fas fa-shopping-cart fa-2x order-lg-2 order-md-2 order-sm-1"></i></a>
+                <a href="{{route('cart')}}"><i class="fas fa-shopping-cart fa-2x order-lg-2 order-md-2 order-sm-1"></i><span id="countNoti"></span></a>
           
         
         <a class="nav-link" href="#"><img src="{{asset('frontendals/images/app.png')}}" height="50"></a>
