@@ -61,18 +61,20 @@ $(document).ready(function () {
   // To Server
   $('.checkout_btn').click(function () {
     // alert('ok');
-    let loStr = localStorage.getItem('items');
+    let loStr = localStorage.getItem('items'); //string
     // let itemArr = JSON.parse(loStr);
     // let url = '{{route("orders.store")}}';
-
+    let note = 'Hello !';  //get note from input
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
 
-    $.post('/orders',{data:loStr},function (res) {
-      console.log(res);
+    $.post('/orders',{data:loStr,note:note},function (res) {
+      // console.log(res);
+      alert(res.status);
+      localStorage.clear();
     })
   })
 

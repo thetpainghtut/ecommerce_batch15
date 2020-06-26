@@ -15,7 +15,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::orderBy('id','desc')->get();
+        return view('backend.orders.index',compact('orders'));
     }
 
     /**
@@ -36,7 +37,8 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        // dd(json_decode($request->data));
+        // dd($request->data);
+
         $loStr = json_decode($request->data);
         $total = 0;
 

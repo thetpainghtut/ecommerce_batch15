@@ -25,7 +25,7 @@ Route::get('/','frontend\FrontendController@index')->name('main');
 Route::get('shop/{id}','frontend\FrontendController@shop')->name('shop');
 
 
-Route::get('load-more-data','frontend\FrontendController@more_data')->name('loadmore');
+// Route::get('load-more-data','frontend\FrontendController@more_data')->name('loadmore');
 
 Route::get('shopdetail/{id}','frontend\FrontendController@shopdetail')->name('shopdetail');
 
@@ -33,17 +33,23 @@ Route::get('cart','frontend\FrontendController@cart')->name('cart');
 
 // backend
 
-Route::get('dashboard','backend\BackendController@index')->name('dashboard');
+Route::middleware('role:admin')->group(function () {
 
-Route::resource('categories','backend\CategoryController');
+  Route::get('dashboard','backend\BackendController@index')->name('dashboard');
 
-Route::resource('subcategories','backend\SubcategoryController');
+  Route::resource('categories','backend\CategoryController');
 
-Route::resource('brands','backend\BrandController');
+  Route::resource('subcategories','backend\SubcategoryController');
 
-Route::resource('users','backend\UserController');
+  Route::resource('brands','backend\BrandController');
 
-Route::resource('items','backend\ItemController');
+  Route::resource('users','backend\UserController');
+
+  Route::resource('items','backend\ItemController');
+
+});
+
+
 
 Route::resource('orders','backend\OrderController');
 

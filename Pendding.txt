@@ -1,5 +1,11 @@
-16/06/2020
+26/06/2020
 ----------
 
-=> add and use fontawesome with npm (pass)
-=> backend navigation collapse show and nav item active for resource routes
+=> backend
+  - Order Reports
+  - Add Auth Middleware (admin)
+
+=> frontend
+  - Add Auth Middleware (customer)
+  - Disable Checkout Btn if Cart is empty
+  - 
