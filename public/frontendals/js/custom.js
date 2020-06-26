@@ -45,7 +45,7 @@ $(document).ready(function () {
         html += `<tr>
                 <td>${j++}</td>
                 <td>${name}</td>
-                <td><img src='{{asset(${photo})}}' class="img-fluid"></td>
+                <td style="width: 25%"><img src=${photo} class="img-fluid w-50"></td>
                 <td>${price}</td>
                 <td>${qty}</td>
                 <td><button class="maxbtn" data-id="${i}" > + </button>
