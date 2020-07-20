@@ -18,6 +18,10 @@ class ItemController extends Controller
     {
         $items = Item::orderBy('id','desc')->get();
         return ItemResource::collection($items);
+        
+        // return response()->json([
+        //     'items' => $items,
+        // ],200);
     }
 
     /**
