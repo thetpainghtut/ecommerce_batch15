@@ -20,7 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::apiresource('items','Api\ItemController');
 
-// Route::apiresource('order','Api\OrderController');
+Route::apiresource('order','Api\OrderController');
+
+Route::post('register','Api\UsersController@store');
 
 
 
