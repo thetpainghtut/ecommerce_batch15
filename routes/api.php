@@ -22,6 +22,9 @@ Route::apiresource('items','Api\ItemController');
 
 Route::apiresource('order','Api\OrderController');
 
+Route::post('register','Api\UsersController@store');
+
+
 
 
 
