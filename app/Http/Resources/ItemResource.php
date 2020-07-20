@@ -23,5 +23,12 @@ class ItemResource extends JsonResource
             'photo' => url($photos[0]),
             'perprice' => $this->price,
         ];
+
+        // return [
+        //     'id' => $this->id,
+        //     'item_name' => $this->name,
+        //     'photo' => url($this->photo),
+        //     'perprice' => $this->price,
+        // ];
     }
 }

@@ -9,6 +9,11 @@ use App\Http\Resources\ItemResource;
 
 class ItemController extends Controller
 {
+
+    public function __construct()
+    {
+        // $this->middleware('auth:api');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,6 +22,8 @@ class ItemController extends Controller
     public function index()
     {
         $items = Item::orderBy('id','desc')->get();
+        // return $items;
+
         return ItemResource::collection($items);
     }
 
@@ -28,7 +35,45 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:191',
+            'codeno' => 'required|max:191',
+            // 'main_category' => 'required',
+            'sub_category' => 'required',
+            'brand' => 'required',
+            'price' => 'required',
+            'discount' => 'required',
+            'description' => 'required',
+            'photo' => 'required',
+            'photo.*' => 'required|mimes:jpeg,bmp,png'
+        ]);
+
+        $data=array();
+        if($request->hasfile('photo'))
+        {   
+            $i=1;
+            foreach($request->file('photo') as $file)
+            {
+                $name = time().$i.'.'.$file->extension();
+                $file->move(public_path('images/items'), $name);  
+                $data[] = 'images/items/'.$name;
+                $i++;
+            }
+        }
+
+        $item = new Item;
+        $item->name = $request->name;
+        $item->codeno = $request->codeno;
+        $item->subcategory_id = $request->sub_category;
+        $item->brand_id = $request->brand;
+        $item->price = $request->price;
+        $item->discount = $request->discount;
+        $item->description = $request->description;
+        $item->photo = json_encode($data);
+
+        $item->save();
+
+        return new ItemResource($item);
     }
 
     /**
@@ -39,7 +84,8 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        //
+        $item = Item::find($id);
+        return new ItemResource($item);
     }
 
     /**
